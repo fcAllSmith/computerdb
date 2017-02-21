@@ -1,8 +1,9 @@
 package com.excilys.formation.fconsigny.computerdb.presentation.modele;
 
 public class CompanyEntity {
-	int id; 
-	String name;
+	
+	private int id; 
+	private String name;
 
 	public CompanyEntity(int id, String name){
 		this.id = id;

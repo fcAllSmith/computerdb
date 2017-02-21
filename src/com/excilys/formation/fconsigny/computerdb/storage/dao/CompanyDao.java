@@ -2,6 +2,8 @@ package com.excilys.formation.fconsigny.computerdb.storage.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.excilys.formation.fconsigny.computerdb.storage.model.CompanyRemote;
 import com.excilys.formation.fconsigny.computerdb.storage.database.Database;;
@@ -10,12 +12,13 @@ public class CompanyDao implements IDao<CompanyRemote>{
 
 	public static String TABLE_NAME = "company";
 
-	public CompanyRemote[] getItems(){
+	public List<CompanyRemote> getItems(){
 		Database db = Database.getDatabase();
 		ResultSet res = db.querySelect(TABLE_NAME);
 		return initManyResultIntoArrayItem(res);
 	}
-
+	
+	@Override
 	public CompanyRemote getItemById(int id){
 		return null;
 	}
@@ -30,23 +33,16 @@ public class CompanyDao implements IDao<CompanyRemote>{
 		return companyRemote; 
 	}
 
-	private CompanyRemote[] initManyResultIntoArrayItem(ResultSet res){
-
-		CompanyRemote[] companyRemote = null; 
-
+	private List<CompanyRemote> initManyResultIntoArrayItem(ResultSet res){
+		List<CompanyRemote> companyList = new ArrayList<CompanyRemote>();
 		try {
-			int size = res.getRow();
-			companyRemote = new CompanyRemote[size];
-
-			for (int i = 0; i < size ; i ++, res.next()){
-				companyRemote[i] = initResultIntoItem(res.getInt(1),res.getString(2));
+			while(res.next()){
+				companyList.add( initResultIntoItem(res.getInt(1),res.getString(2)));
 			}
-
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block  
 			e.printStackTrace();
 		}
-		return companyRemote;
+		return companyList;
 	}
 
 }

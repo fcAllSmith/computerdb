@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IDao <T> {
 
-	public T[] getItems();
+	public List<T> getItems();
 	public T getItemById(int id);
 
 }

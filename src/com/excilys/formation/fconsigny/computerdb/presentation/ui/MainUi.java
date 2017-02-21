@@ -5,13 +5,14 @@ import java.util.List;
 import com.excilys.formation.fconsigny.computerdb.presentation.AppView;
 import com.excilys.formation.fconsigny.computerdb.presentation.IApp;
 import com.excilys.formation.fconsigny.computerdb.presentation.controller.CompanyController;
+import com.excilys.formation.fconsigny.computerdb.presentation.controller.ComputerController;
 import com.excilys.formation.fconsigny.computerdb.presentation.modele.CompanyEntity;
+import com.excilys.formation.fconsigny.computerdb.presentation.modele.ComputerEntity;
 
 public class MainUi extends AppView implements IApp{
 
 	@Override
 	public void RefreshUi() {
-		// TODO Auto-generated method stub
 		showText("Welcom in main ui");
 		showText("-- Menu --");
 		showText("1 - List computers");
@@ -22,17 +23,16 @@ public class MainUi extends AppView implements IApp{
 	}
 
 	public void onInputKey(String inputKey){
-
-		int inputChoice = -1;
-
+	
 		try{
-			inputChoice = Integer.parseInt(inputKey);
+			int inputChoice = Integer.parseInt(inputKey);
 			switch(inputChoice){
 			case 0: 
 				//TODO : exit
 				break;
 			case 1: 
 				//TODO : Show list computers
+				loadListComputer();
 				break; 
 			case 2:
 				loadListCompany();
@@ -44,15 +44,20 @@ public class MainUi extends AppView implements IApp{
 		}catch(NumberFormatException e){
 			showText("This input cannot be used. Use numbers instead");
 		}
-
+		
 		RefreshUi();
 	}
-
 	private void loadListCompany(){
-		//TODO write something
 		List<CompanyEntity> listCompanies = new CompanyController().loadCompanies();
 		for(CompanyEntity company : listCompanies){
 			showText(company.toString());
+		}
+	}
+	
+	private void loadListComputer(){
+		List<ComputerEntity> listComputers = new ComputerController().loadComputers();
+		for(ComputerEntity computer : listComputers){
+			showText(computer.toString());
 		}
 	}
 }

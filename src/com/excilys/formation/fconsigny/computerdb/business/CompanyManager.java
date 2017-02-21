@@ -11,13 +11,15 @@ public class CompanyManager implements ICompany{
 
 	public List<Company> getRemoteCompanies(){
 
-		CompanyRemote[] companyRemoteArray =  AppStorage.getAllCompanies();
+		List<CompanyRemote> companyRemoteList =  AppStorage.getAllCompanies();
 		List<Company> companyList = null;
-		if(companyRemoteArray != null){
+		if(companyRemoteList != null){
 			companyList =  new ArrayList<Company>();
 
-			for (int i = 0; i < companyRemoteArray.length; i++){
-				companyList.add(new Company(companyRemoteArray[i].getId(),companyRemoteArray[i].getName()));
+			for (int i = 0; i < companyRemoteList.size(); i++){
+				companyList.add(new Company(
+						companyRemoteList.get(i).getId(),
+						companyRemoteList.get(i).getName()));
 			}
 		}
 		return companyList;
