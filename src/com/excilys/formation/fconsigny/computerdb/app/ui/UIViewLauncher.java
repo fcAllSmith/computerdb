@@ -10,30 +10,40 @@ import com.excilys.formation.fconsigny.computerdb.app.controller.ComputerControl
 import com.excilys.formation.fconsigny.computerdb.app.entity.CompanyEntity;
 import com.excilys.formation.fconsigny.computerdb.app.entity.ComputerEntity;
 
-public class MainUi extends AppView implements IApp{
-
+public class UIViewLauncher extends AppView implements IApp{
+	
+	@Override
+	public void CreateView(AppView appParentView) {
+		// TODO Auto-generated method stub
+		this.RefreshUi();
+	}
+	
 	@Override
 	public void RefreshUi() {
-		//showText(" _________________________________________________");
-		 //showText("|					Welcom in main ui				|");
-		showText("|					------- Menu -------			|");
-		showText("|		1 - Show list of computers					|");
-		showText("|		2 - Show list of companies					|");
-		showText("|		3 - Select a computer for info				|");
-		showText("|		4 - Select a company for info				|"); 
-		showText("|		5 - Remove a computer from the data base 	|");
-		showText("|													|");
-		showText("|	What do you want to do ? :						|");	
-	//	showText(" _________________________________________________");
+		showTitle(UIViewLauncher.class); 
+
+		showText("------- Menu -------");
+		showText("1 - Show list of computers") ;
+		showText("2 - Show list of companies");
+		showText("3 - Select a computer for info") ;
+		showText( "4 - Select a company for info");
+		showText("5 - Remove a computer from the data base ");
+		showText( "What do you want to do ? :");
+
 		String str_input;
 		
 		try {
 			str_input = readInputText();
 			onInputKey(str_input);
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void DestroyView() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public void onInputKey(String str_input){
@@ -46,7 +56,9 @@ public class MainUi extends AppView implements IApp{
 				break;
 			case 1: 
 				//TODO : Show list computers
-				loadListComputer();
+				//loadListComputer();
+				UIViewComputer uiViewComputer = new UIViewComputer();
+				uiViewComputer.CreateView(this);
 				break; 
 			case 2:
 				loadListCompany();
@@ -77,7 +89,6 @@ public class MainUi extends AppView implements IApp{
 
 		RefreshUi();
 	}
-
 
 	/** Companies **/
 	private void loadListCompany(){
@@ -115,10 +126,13 @@ public class MainUi extends AppView implements IApp{
 	}
 	
 	private void deleteComputer(int id){
+		
 		if(new ComputerController().removeComputer(id)){
 			showText("the computer has been removed");
 		}else{
 			showText("this computer doesn't exist");
 		}
 	}
+
+
 }

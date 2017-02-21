@@ -4,8 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.excilys.formation.fconsigny.computerdb.app.ui.UIViewComponents;
+
 public abstract class AppView {
 
+	UIViewComponents ui_components;
+	
 	public String readInputText() throws IOException {
 		String inputText = null; 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -14,6 +18,7 @@ public abstract class AppView {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		return inputText;
 	}
 
@@ -23,5 +28,10 @@ public abstract class AppView {
 		else 
 			throw new IllegalArgumentException();  
 	}
+	
+	public void showTitle(Class<?> c){
+		System.out.println(UIViewComponents.LEFT_TEXT_MARGIN + c.getSimpleName());
+	}
+
 
 }
