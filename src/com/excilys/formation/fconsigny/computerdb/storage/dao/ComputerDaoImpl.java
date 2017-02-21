@@ -8,7 +8,7 @@ import java.util.List;
 import com.excilys.formation.fconsigny.computerdb.storage.database.Database;
 import com.excilys.formation.fconsigny.computerdb.storage.model.ComputerRemote;
 
-public class ComputerDao implements IDao<ComputerRemote> {
+public class ComputerDaoImpl implements IDao<ComputerRemote> {
 
 	public static String TABLE_NAME = "computer";
 

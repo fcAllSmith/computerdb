@@ -7,12 +7,13 @@ import com.excilys.formation.fconsigny.computerdb.business.model.Company;
 import com.excilys.formation.fconsigny.computerdb.storage.AppStorage;
 import com.excilys.formation.fconsigny.computerdb.storage.model.CompanyRemote;
 
-public class CompanyManager {	
+public abstract class CompanyManager {	
 
-	public List<Company> getRemoteCompanies(){
+	public static List<Company> getRemoteCompanies(){
 
 		List<CompanyRemote> companyRemoteList =  AppStorage.getAllCompanies();
 		List<Company> companyList = null;
+		
 		if(companyRemoteList != null){
 			companyList =  new ArrayList<Company>();
 
@@ -22,10 +23,18 @@ public class CompanyManager {
 						companyRemoteList.get(i).getName()));
 			}
 		}
+		
 		return companyList;
 
 	}
-	public CompanyRemote getRemoteCompany(int id){
-		return AppStorage.getCompany(id);
+	
+	public static Company  getRemoteCompany(int id){
+		CompanyRemote cr = AppStorage.getCompany(id);
+		
+		if( cr != null){
+			return new Company(cr.getId(),cr.getName());
+		}
+		
+		return null; 
 	}
 }

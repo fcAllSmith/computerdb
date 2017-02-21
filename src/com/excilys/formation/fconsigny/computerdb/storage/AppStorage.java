@@ -2,8 +2,9 @@ package com.excilys.formation.fconsigny.computerdb.storage;
 
 import java.util.List;
 
-import com.excilys.formation.fconsigny.computerdb.storage.dao.CompanyDao;
-import com.excilys.formation.fconsigny.computerdb.storage.dao.ComputerDao;
+import com.excilys.formation.fconsigny.computerdb.storage.dao.CompanyDaoImpl;
+import com.excilys.formation.fconsigny.computerdb.storage.dao.ComputerDaoImpl;
+import com.excilys.formation.fconsigny.computerdb.storage.dao.IDao;
 import com.excilys.formation.fconsigny.computerdb.storage.model.CompanyRemote;
 import com.excilys.formation.fconsigny.computerdb.storage.model.ComputerRemote;
 
@@ -13,25 +14,25 @@ import com.excilys.formation.fconsigny.computerdb.storage.model.ComputerRemote;
  * @author excilys
  *
  */
-public abstract class AppStorage implements IStorage{
+public abstract class AppStorage{
 
 	public static List<CompanyRemote> getAllCompanies(){
-		CompanyDao companyDao = new CompanyDao();
-		return companyDao.getItems();
+		return new CompanyDaoImpl().getItems();
 	}
-
+	
 	public static List<ComputerRemote> getAllComputers(){
-		ComputerDao computerDao = new ComputerDao();
-		return computerDao.getItems();
+		return new ComputerDaoImpl().getItems();
 	}
 
 	public static final ComputerRemote getComputer(int id){
-		ComputerDao computerDao = new ComputerDao();
-		return computerDao.getItemById(id);
+		return new ComputerDaoImpl().getItemById(id);
 	}
 	
 	public static final CompanyRemote getCompany(int id){
-		CompanyDao companyDao = new CompanyDao();
-		return companyDao.getItemById(id);
+		return new CompanyDaoImpl().getItemById(id);
+	}
+
+	public static boolean deleteComputer(int id){
+		return false;
 	}
 }

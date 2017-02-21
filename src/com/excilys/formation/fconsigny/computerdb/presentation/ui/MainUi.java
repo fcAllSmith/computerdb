@@ -1,5 +1,6 @@
 package com.excilys.formation.fconsigny.computerdb.presentation.ui;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.excilys.formation.fconsigny.computerdb.presentation.AppView;
@@ -18,16 +19,23 @@ public class MainUi extends AppView implements IApp{
 		showText("1 - List computers");
 		showText("2 - List companies");
 		showText("3 - Select one computer");
-		showText(" What do you want to do ? :");
-		String choice = readInputText();
-		onInputKey(choice);
+		showText("What do you want to do ? :");
+		String str_input;
+		
+		try {
+			str_input = readInputText();
+			onInputKey(str_input);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void onInputKey(String inputKey){
+	public void onInputKey(String str_input){
 
 		try{
-			int inputChoice = Integer.parseInt(inputKey);
-			switch(inputChoice){
+			int cmd = Integer.parseInt(str_input);
+			switch(cmd){
 			case 0: 
 				//TODO : exit
 				break;
@@ -40,20 +48,21 @@ public class MainUi extends AppView implements IApp{
 				break; 
 			case 3: 
 				showText("Computer id  : ");
-				String sComputId = readInputText();
-				loadComputerById(Integer.parseInt(sComputId));
+				String str_computId = readInputText();
+				loadComputerById(Integer.parseInt(str_computId));
 				break;
 			case 4:
 				showText("Company id : "); 
-				String sCompanId = readInputText();
-				loadCompanyById(Integer.parseInt(sCompanId));
+				String str_companId = readInputText();
+				loadCompanyById(Integer.parseInt(str_companId));
 				break;
 			default:
-				System.out.println("command not found");
+				showText("command not found");
 				break; 
 			}
-		}catch(NumberFormatException e){
-			showText("This input cannot be used. Use numbers instead");
+			
+		}catch(NumberFormatException | IOException err){
+			showText("This input cannot be used. Use numbers instead :" + err);
 		}
 
 		RefreshUi();
@@ -62,8 +71,8 @@ public class MainUi extends AppView implements IApp{
 
 	/** Companies **/
 	private void loadListCompany(){
-		List<CompanyEntity> listCompanies = new CompanyController().loadCompanies();
-		for(CompanyEntity company : listCompanies){
+		List<CompanyEntity> lCompanies = new CompanyController().loadCompanies();
+		for(CompanyEntity company : lCompanies){
 			showText(company.toString());
 		}
 	}
@@ -89,8 +98,8 @@ public class MainUi extends AppView implements IApp{
 	}
 
 	private void loadListComputer(){
-		List<ComputerEntity> listComputers = new ComputerController().loadComputers();
-		for(ComputerEntity computer : listComputers){
+		List<ComputerEntity> lComputers = new ComputerController().loadComputers();
+		for(ComputerEntity computer : lComputers){
 			showText(computer.toString());
 		}
 	}

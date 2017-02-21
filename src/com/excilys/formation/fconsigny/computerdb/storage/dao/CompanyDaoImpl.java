@@ -8,7 +8,7 @@ import java.util.List;
 import com.excilys.formation.fconsigny.computerdb.storage.model.CompanyRemote;
 import com.excilys.formation.fconsigny.computerdb.storage.database.Database;;
 
-public class CompanyDao implements IDao<CompanyRemote>{
+public class CompanyDaoImpl implements IDao<CompanyRemote>{
 
 	public static String TABLE_NAME = "company";
 

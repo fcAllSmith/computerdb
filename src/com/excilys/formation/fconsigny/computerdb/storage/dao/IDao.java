@@ -3,7 +3,7 @@ package com.excilys.formation.fconsigny.computerdb.storage.dao;
 import java.util.List;
 
 /**
- *  Contract of DAO classes
+ * 
  * @author excilys
  *
  * @param <T>

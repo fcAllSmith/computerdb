@@ -7,12 +7,13 @@ import com.excilys.formation.fconsigny.computerdb.business.model.Computer;
 import com.excilys.formation.fconsigny.computerdb.storage.AppStorage;
 import com.excilys.formation.fconsigny.computerdb.storage.model.ComputerRemote;
 
-public class ComputerManager {
+public abstract class ComputerManager {
 	
-	public List<Computer> getRemoteComputers(){
+	public static List<Computer> getRemoteComputers(){
 
 		List<ComputerRemote> computerRemoteList =  AppStorage.getAllComputers();
 		List<Computer> computerList = null;
+		
 		if(computerRemoteList != null){
 			computerList =  new ArrayList<Computer>();
 
@@ -24,7 +25,16 @@ public class ComputerManager {
 
 	}
 	
-	public ComputerRemote getRemoteComputer(int id){
-		return AppStorage.getComputer(id); 
+	public static Computer getRemoteComputer(int id){
+		ComputerRemote cr = AppStorage.getComputer(id);
+		return new Computer(cr.getId(),cr.getName(),cr.getCompanyId());  
+	}
+	
+	/*public boolean updateComputer(ComputerRemote computer){
+		return AppStorage.updateComputer(computer);
+	}*/
+	
+	public boolean deleteComputer(ComputerRemote computer){
+		return AppStorage.deleteComputer(computer.getId()); 
 	}
 }

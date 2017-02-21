@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 public abstract class AppView {
 
-	public String readInputText(){
+	public String readInputText() throws IOException {
 		String inputText = null; 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		try {
