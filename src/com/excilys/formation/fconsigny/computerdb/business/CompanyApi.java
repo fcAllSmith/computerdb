@@ -7,7 +7,7 @@ import com.excilys.formation.fconsigny.computerdb.business.model.Company;
 import com.excilys.formation.fconsigny.computerdb.storage.AppStorage;
 import com.excilys.formation.fconsigny.computerdb.storage.model.CompanyRemote;
 
-public abstract class CompanyManager {	
+public abstract class CompanyApi {	
 
 	public static List<Company> getRemoteCompanies(){
 

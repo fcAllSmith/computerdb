@@ -1,25 +1,30 @@
-package com.excilys.formation.fconsigny.computerdb.presentation.ui;
+package com.excilys.formation.fconsigny.computerdb.app.ui;
 
 import java.io.IOException;
 import java.util.List;
 
-import com.excilys.formation.fconsigny.computerdb.presentation.AppView;
-import com.excilys.formation.fconsigny.computerdb.presentation.IApp;
-import com.excilys.formation.fconsigny.computerdb.presentation.controller.CompanyController;
-import com.excilys.formation.fconsigny.computerdb.presentation.controller.ComputerController;
-import com.excilys.formation.fconsigny.computerdb.presentation.modele.CompanyEntity;
-import com.excilys.formation.fconsigny.computerdb.presentation.modele.ComputerEntity;
+import com.excilys.formation.fconsigny.computerdb.app.AppView;
+import com.excilys.formation.fconsigny.computerdb.app.IApp;
+import com.excilys.formation.fconsigny.computerdb.app.controller.CompanyController;
+import com.excilys.formation.fconsigny.computerdb.app.controller.ComputerController;
+import com.excilys.formation.fconsigny.computerdb.app.entity.CompanyEntity;
+import com.excilys.formation.fconsigny.computerdb.app.entity.ComputerEntity;
 
 public class MainUi extends AppView implements IApp{
 
 	@Override
 	public void RefreshUi() {
-		showText("Welcom in main ui");
-		showText("-- Menu --");
-		showText("1 - List computers");
-		showText("2 - List companies");
-		showText("3 - Select one computer");
-		showText("What do you want to do ? :");
+		//showText(" _________________________________________________");
+		 //showText("|					Welcom in main ui				|");
+		showText("|					------- Menu -------			|");
+		showText("|		1 - Show list of computers					|");
+		showText("|		2 - Show list of companies					|");
+		showText("|		3 - Select a computer for info				|");
+		showText("|		4 - Select a company for info				|"); 
+		showText("|		5 - Remove a computer from the data base 	|");
+		showText("|													|");
+		showText("|	What do you want to do ? :						|");	
+	//	showText(" _________________________________________________");
 		String str_input;
 		
 		try {
@@ -56,6 +61,11 @@ public class MainUi extends AppView implements IApp{
 				String str_companId = readInputText();
 				loadCompanyById(Integer.parseInt(str_companId));
 				break;
+			case 5:
+				showText("Computer id : ");
+				String str_compId = readInputText();
+				deleteComputer(Integer.parseInt(str_compId));
+				break; 
 			default:
 				showText("command not found");
 				break; 
@@ -101,6 +111,14 @@ public class MainUi extends AppView implements IApp{
 		List<ComputerEntity> lComputers = new ComputerController().loadComputers();
 		for(ComputerEntity computer : lComputers){
 			showText(computer.toString());
+		}
+	}
+	
+	private void deleteComputer(int id){
+		if(new ComputerController().removeComputer(id)){
+			showText("the computer has been removed");
+		}else{
+			showText("this computer doesn't exist");
 		}
 	}
 }

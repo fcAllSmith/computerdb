@@ -3,11 +3,13 @@ package com.excilys.formation.fconsigny.computerdb.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.excilys.formation.fconsigny.computerdb.app.entity.ComputerEntity;
 import com.excilys.formation.fconsigny.computerdb.business.model.Computer;
 import com.excilys.formation.fconsigny.computerdb.storage.AppStorage;
 import com.excilys.formation.fconsigny.computerdb.storage.model.ComputerRemote;
+import com.excilys.formation.fconsigny.computerdb.utils.AppDebug;
 
-public abstract class ComputerManager {
+public abstract class ComputerApi {
 	
 	public static List<Computer> getRemoteComputers(){
 
@@ -22,7 +24,6 @@ public abstract class ComputerManager {
 			}
 		}
 		return computerList;
-
 	}
 	
 	public static Computer getRemoteComputer(int id){
@@ -34,7 +35,8 @@ public abstract class ComputerManager {
 		return AppStorage.updateComputer(computer);
 	}*/
 	
-	public boolean deleteComputer(ComputerRemote computer){
+	public static boolean deleteComputer(ComputerEntity computer){
+		AppDebug.log(ComputerApi.class, "we are here");
 		return AppStorage.deleteComputer(computer.getId()); 
 	}
 }

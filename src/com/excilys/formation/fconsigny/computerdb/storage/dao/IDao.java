@@ -11,4 +11,6 @@ import java.util.List;
 public interface IDao <T> {
 	public List<T> getItems();
 	public T getItemById(int id);
+	public boolean deleteItemById(int id);
+	public boolean updateItem(T object);
 }

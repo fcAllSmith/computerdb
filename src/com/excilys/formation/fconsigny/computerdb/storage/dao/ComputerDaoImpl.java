@@ -11,6 +11,7 @@ import com.excilys.formation.fconsigny.computerdb.storage.model.ComputerRemote;
 public class ComputerDaoImpl implements IDao<ComputerRemote> {
 
 	public static String TABLE_NAME = "computer";
+	private final static String QUERY_DELETE = "DELETE FROM computer WHERE id=";
 
 	@Override
 	public List<ComputerRemote> getItems() {
@@ -56,6 +57,28 @@ public class ComputerDaoImpl implements IDao<ComputerRemote> {
 			e.printStackTrace();
 		}
 		return computerRemoteList;
+	}
+
+	
+	@Override
+	public boolean deleteItemById(int id) {
+		Database db = Database.getDatabase();
+		String query = QUERY_DELETE.concat(Integer.toString(id) + ";") ; 
+		try {
+			System.out.println(query);
+			return (db.modifyData(query) > 0);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+
+	@Override
+	public boolean updateItem(ComputerRemote object) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

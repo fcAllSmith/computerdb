@@ -7,6 +7,7 @@ import com.excilys.formation.fconsigny.computerdb.storage.dao.ComputerDaoImpl;
 import com.excilys.formation.fconsigny.computerdb.storage.dao.IDao;
 import com.excilys.formation.fconsigny.computerdb.storage.model.CompanyRemote;
 import com.excilys.formation.fconsigny.computerdb.storage.model.ComputerRemote;
+import com.excilys.formation.fconsigny.computerdb.utils.AppDebug;
 
 /**
  *  List every possible Query on entities
@@ -33,6 +34,7 @@ public abstract class AppStorage{
 	}
 
 	public static boolean deleteComputer(int id){
-		return false;
+		AppDebug.log(AppStorage.class, "here");
+		return new ComputerDaoImpl().deleteItemById(id);
 	}
 }

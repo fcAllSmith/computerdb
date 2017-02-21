@@ -1,4 +1,4 @@
-package com.excilys.formation.fconsigny.computerdb.presentation.modele;
+package com.excilys.formation.fconsigny.computerdb.app.entity;
 
 public class CompanyEntity {
 	

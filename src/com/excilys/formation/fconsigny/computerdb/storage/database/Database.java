@@ -73,6 +73,16 @@ public class Database {
 		return null;
 	}
 
+	public ResultSet doQuery(String query) throws SQLException{
+		Statement stmt = this.prepareQuery();		
+		return this.execQuery(stmt,query);
+	}
+	
+	public int modifyData(String query) throws SQLException{
+		Statement stmt = this.prepareQuery();
+		return stmt.executeUpdate(query);
+	}
+	
 	private Statement prepareQuery() throws SQLException{
 		return getConnection().createStatement(); 
 	}

@@ -55,4 +55,16 @@ public class CompanyDaoImpl implements IDao<CompanyRemote>{
 		}
 		return companyList;
 	}
+
+	@Override
+	public boolean deleteItemById(int id) {
+		// TODO NOTHING
+		return false;
+	}
+
+	@Override
+	public boolean updateItem(CompanyRemote object) {
+		// TODO NOTHING
+		return false;
+	}
 }

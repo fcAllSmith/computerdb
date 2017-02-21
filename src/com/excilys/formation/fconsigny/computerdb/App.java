@@ -1,6 +1,6 @@
 package com.excilys.formation.fconsigny.computerdb;
 
-import com.excilys.formation.fconsigny.computerdb.presentation.ui.MainUi;
+import com.excilys.formation.fconsigny.computerdb.app.ui.MainUi;
 
 public class App {
 

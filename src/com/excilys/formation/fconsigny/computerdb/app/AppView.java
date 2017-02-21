@@ -1,4 +1,4 @@
-package com.excilys.formation.fconsigny.computerdb.presentation;
+package com.excilys.formation.fconsigny.computerdb.app;
 
 import java.io.BufferedReader;
 import java.io.IOException;
