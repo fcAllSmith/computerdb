@@ -24,7 +24,7 @@ public class ComputerManager {
 
 	}
 	
-	public ComputerRemote getRemoteComputer(){
-		return null; 
+	public ComputerRemote getRemoteComputer(int id){
+		return AppStorage.getComputer(id); 
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import com.excilys.formation.fconsigny.computerdb.business.ComputerManager;
 import com.excilys.formation.fconsigny.computerdb.business.model.Computer;
 import com.excilys.formation.fconsigny.computerdb.presentation.modele.ComputerEntity;
+import com.excilys.formation.fconsigny.computerdb.storage.model.ComputerRemote;
 
 public class ComputerController {
 
@@ -21,5 +22,15 @@ public class ComputerController {
 			}
 		}
 		return computerEntityList;
+	}
+	
+	public ComputerEntity loadComputer(int id){
+		ComputerManager cm = new ComputerManager(); 
+		ComputerRemote cr = cm.getRemoteComputer(id); 
+
+		if(cr != null){
+			return new ComputerEntity( cr.getId(),cr.getName(),cr.getCompanyId());
+		}
+		return null; 
 	}
 }

@@ -14,6 +14,10 @@ public class ComputerEntity {
 	
 	@Override
 	public String toString(){
-		return "Id : " + id + " Name : " + name + " company_id : " + company_id ;
+		if(this.id != -1){
+			return "Id : " + id + " Name : " + name + " company_id : " + company_id ;	
+		}else{
+			return "no data";
+		}
 	}
 }

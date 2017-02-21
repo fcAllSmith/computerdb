@@ -20,6 +20,17 @@ public class CompanyDao implements IDao<CompanyRemote>{
 	
 	@Override
 	public CompanyRemote getItemById(int id){
+		Database db = Database.getDatabase();
+		ResultSet res = db.querySelectById(TABLE_NAME, id);
+		if(res != null){
+			try {
+				if(res.next()){
+					return initResultIntoItem(res.getInt(1),res.getString(2));	
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}	
+		}
 		return null;
 	}
 
@@ -44,5 +55,4 @@ public class CompanyDao implements IDao<CompanyRemote>{
 		}
 		return companyList;
 	}
-
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import com.excilys.formation.fconsigny.computerdb.business.CompanyManager;
 import com.excilys.formation.fconsigny.computerdb.business.model.Company;
 import com.excilys.formation.fconsigny.computerdb.presentation.modele.CompanyEntity;
+import com.excilys.formation.fconsigny.computerdb.storage.model.CompanyRemote;
 
 public class CompanyController {
 	
@@ -23,4 +24,13 @@ public class CompanyController {
 		return companiesEntityList;
 	}
 
+	public CompanyEntity loadCompany(int id){
+		CompanyManager cm = new CompanyManager(); 
+		CompanyRemote cr = cm.getRemoteCompany(id); 
+
+		if(cr != null){
+			return new CompanyEntity( cr.getId(),cr.getName());
+		}
+		return null; 
+	}
 }

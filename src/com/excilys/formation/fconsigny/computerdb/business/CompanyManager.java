@@ -7,7 +7,7 @@ import com.excilys.formation.fconsigny.computerdb.business.model.Company;
 import com.excilys.formation.fconsigny.computerdb.storage.AppStorage;
 import com.excilys.formation.fconsigny.computerdb.storage.model.CompanyRemote;
 
-public class CompanyManager implements ICompany{	
+public class CompanyManager {	
 
 	public List<Company> getRemoteCompanies(){
 
@@ -25,7 +25,7 @@ public class CompanyManager implements ICompany{
 		return companyList;
 
 	}
-	public Company getRemoteCompany(){
-		return null; 
+	public CompanyRemote getRemoteCompany(int id){
+		return AppStorage.getCompany(id);
 	}
 }

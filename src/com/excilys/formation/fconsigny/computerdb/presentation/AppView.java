@@ -18,6 +18,10 @@ public abstract class AppView {
 	}
 
 	public void showText(String text){
-		System.out.println(text);
+		if(text != null)
+			System.out.println(text);
+		else 
+			throw new IllegalArgumentException();  
 	}
+
 }

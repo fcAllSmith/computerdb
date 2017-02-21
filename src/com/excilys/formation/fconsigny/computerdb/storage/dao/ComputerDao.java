@@ -21,9 +21,20 @@ public class ComputerDao implements IDao<ComputerRemote> {
 
 	@Override
 	public ComputerRemote getItemById(int id) {
+		Database db = Database.getDatabase();
+		ResultSet res = db.querySelectById(TABLE_NAME, id);
+		if(res != null){
+			try {
+				if(res.next()){
+					return initResultIntoItem(res.getInt(1),res.getString(2),res.getInt(5));	
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}	
+		}
 		return null;
 	}
-	
+
 	private ComputerRemote initResultIntoItem(int id, String name,int companyId){
 		ComputerRemote computerRemote = null; 
 		if(id != -1  && name != null){
@@ -46,6 +57,5 @@ public class ComputerDao implements IDao<ComputerRemote> {
 		}
 		return computerRemoteList;
 	}
-	
 
 }
