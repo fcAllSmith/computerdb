@@ -6,25 +6,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Database {
+
 	private String dbname = null;
 	private String host = null; 
 	private String user = null; 
 	private String passwd = null; 
-	
+
 	private Connection conn = null; 
 	private static Database _instance;
-	
+
 	private Database(){
-		
+		openDataBase();
 	}
-		
+
 	private void openDataBase(){
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String customPDO = "jdbc:mysql://localhost:3306/computer-database-db2";
 			try{
 				this.conn = DriverManager.getConnection(customPDO);
-				
+
 			}catch(SQLException error){
 				System.out.println(error.toString());
 			}finally{
@@ -35,11 +36,11 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
+
 	private Connection getConnection(){
-		
 		return this.conn; 
 	}
-	
+
 	public static Database getDatabase(){
 		if(_instance == null){
 			_instance  = new Database();
@@ -54,16 +55,18 @@ public class Database {
 		java.sql.Statement stmt = null;
 		try {
 			stmt = getConnection().createStatement();
+			return stmt.executeQuery("SELECT * FROM " + tableName);
+
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} 
-		try {
-			return stmt.executeQuery("SELECT * FROM " + tableName);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		return null;
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		throw new CloneNotSupportedException();
 	}
 }

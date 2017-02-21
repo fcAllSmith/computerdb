@@ -3,8 +3,8 @@ package com.excilys.formation.fconsigny.computerdb.presentation.ui;
 import java.util.List;
 
 import com.excilys.formation.fconsigny.computerdb.presentation.AppView;
-import com.excilys.formation.fconsigny.computerdb.presentation.CompanyComponent;
 import com.excilys.formation.fconsigny.computerdb.presentation.IApp;
+import com.excilys.formation.fconsigny.computerdb.presentation.controller.CompanyController;
 import com.excilys.formation.fconsigny.computerdb.presentation.modele.CompanyEntity;
 
 public class MainUi extends AppView implements IApp{
@@ -20,14 +20,14 @@ public class MainUi extends AppView implements IApp{
 		String choice = readInputText();
 		onInputKey(choice);
 	}
-	
+
 	public void onInputKey(String inputKey){
-		
+
 		int inputChoice = -1;
-		
-	    try{
-	        inputChoice = Integer.parseInt(inputKey);
-	        switch(inputChoice){
+
+		try{
+			inputChoice = Integer.parseInt(inputKey);
+			switch(inputChoice){
 			case 0: 
 				//TODO : exit
 				break;
@@ -41,22 +41,18 @@ public class MainUi extends AppView implements IApp{
 				System.out.println("command not found");
 				break; 
 			}
-	    }catch(NumberFormatException e){
-	        showText("This input cannot be used. Use numbers instead");
-	    }
-	    
-	    RefreshUi();
+		}catch(NumberFormatException e){
+			showText("This input cannot be used. Use numbers instead");
+		}
+
+		RefreshUi();
 	}
-	
+
 	private void loadListCompany(){
 		//TODO write something
-		List<CompanyEntity> listCompanies = new CompanyComponent().loadCompanies();
-		if(listCompanies.isEmpty()){
-			showText("No item found");
-		}else{
-			for(int i = 0; i < listCompanies.size(); i++){
-				showText(listCompanies.get(i).toString());
-			}
+		List<CompanyEntity> listCompanies = new CompanyController().loadCompanies();
+		for(CompanyEntity company : listCompanies){
+			showText(company.toString());
 		}
 	}
 }

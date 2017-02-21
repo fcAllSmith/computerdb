@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 
 public abstract class AppView {
 
-
 	public String readInputText(){
 		String inputText = null; 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -18,10 +17,10 @@ public abstract class AppView {
 			e.printStackTrace();
 			inputText = null;
 		}
-		
+
 		return inputText;
 	}
-	
+
 	public void showText(String text){
 		System.out.println(text);
 	}
